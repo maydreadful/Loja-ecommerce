@@ -1,18 +1,20 @@
 :root {
   --background-color: #000000;
-  --font-color: #6c7570;
-  --primary-color: #da2d2d;
-  --primary-color: #f4f4f4;
+  --font-color: #6C757D;
+  --primary-color: #f40046;
+  --secondary-color: #c10035;
 }
 
 * {
   margin: 0;
   padding: 0;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 body {
   height: 100vh;
+  align-items: center;
 }
 
 header {
@@ -45,12 +47,13 @@ header {
   border-radius: 100%;
 }
 
-#header-nav ul li {
+#header-nav ul li a{
   color: white;
   &:first-child {
     color: var(--primary-color);
   }
   font-weight: bold;
+  text-decoration: none; /* tira o link azul das tags <a> */
 }
 
 #header-search-bar {
@@ -79,14 +82,91 @@ header {
   padding: 1.5rem 0.5rem;
   border: none;
   position: absolute;
-  right:0.08rem;
+  right: 0.08rem;
   top: 0.1rem;
 
-  &:activate{
+  &:activate {
     transform: scale(0.9);
   }
 }
 
 #search-icon {
-  width: 1.8rem;
+  width: 0.8rem;
 }
+
+/* === CARROSSEL*/
+
+.carousel {
+  position: relative;
+  width:100%;
+  max-width: 1700px; /* ou o valor que quiser */
+  height: 600px;     /* altura tipo banner menor */
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.carousel figure {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  animation: slide 16s infinite;
+}
+
+.carousel .slide {
+  flex: 0 0 100%;
+  height: 100%;
+  } 
+
+.carousel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  /* garante que toda a imagem apareça, mesmo que sobre espaço. */ 
+  background-color: #000; /* cor de fundo para bordas geradas por contain. */ 
+  display: block;  
+} 
+
+@keyframes slide {
+  0%   { transform: translateX(0%); }
+  20%  { transform: translateX(0%); }
+  25%  { transform: translateX(-100%); }
+  45%  { transform: translateX(-100%); }
+  50%  { transform: translateX(-200%); }
+  70%  { transform: translateX(-200%); }
+  75%  { transform: translateX(-300%); }
+  95%  { transform: translateX(-300%); }
+  100% { transform: translateX(0%); }
+}
+
+.indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  animation: highlight 16s infinite;
+}
+
+.carousel:hover .carousel-track,
+.carousel:hover .dot {
+  animation-play-state: paused; /* Quando o mouse está sobre o carrossel, a animação para. */ 
+}
+
+.dot:nth-child(1) { animation-delay: 0s; }
+.dot:nth-child(2) { animation-delay: 4s; }
+.dot:nth-child(3) { animation-delay: 8s; }
+.dot:nth-child(4) { animation-delay: 12s; }
+
+@keyframes highlight {
+  0%, 100%   { background: rgba(255,255,255,0.5); }
+  10%, 20%   { background: white; }
+}
+
